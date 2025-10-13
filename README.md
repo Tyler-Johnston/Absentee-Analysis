@@ -20,13 +20,7 @@ This project aims to analyze employee absenteeism, identify meaningful worker se
 
 - **Source:** The original unedited dataset is <i>absenteeism_data.csv</i>
 - **Description:** The dataset contains employee information relevant to absenteeism; such as, the reason for absense, the month of absense, their date of birth, their number of children, being a social smoker, etc.
-- **Size:** [Number of rows and columns]  
-- **Key considerations:**  
-  - Missing values  
-  - Outliers  
-  - Categorical vs. numerical features  
-  - Feature correlations
-
+- **Size:** 801 rows with 22 columns 
 ---
 
 ## 1. Exploratory Data Analysis (EDA) & Preprocessing
@@ -77,13 +71,13 @@ This project aims to analyze employee absenteeism, identify meaningful worker se
 
 **Implemented Solutions:**  
 - **Visual Dashboard:**  
-  - Interactive visualizations to explore employee clusters and absenteeism trends  
+  - TODO
 - **Predictive Assignment:**  
-  - Predictive model for assigning new employees to clusters  
+  - TODO
 - **Feature Importance Analysis:**  
-  - Insights into the most influential factors for absenteeism  
+  - TODO 
 - **Recommendations:**  
-  - [List practical strategies for HR based on cluster analysis]
+  - TODO
 
 ---
 
@@ -91,8 +85,8 @@ This project aims to analyze employee absenteeism, identify meaningful worker se
 
 | File | Description |
 |------|-------------|
-| `GroupXX_DMI_2526.ipynb` | Jupyter Notebook containing all analysis, preprocessing, and clustering code. Commented code includes exploration and decision-making steps. |
-| `GroupXX_DMI_2526_report.pdf` | Structured report summarizing analytical processes, results, and practical recommendations (max 15 pages). |
+| `Group10_DMI_2526.ipynb` | Jupyter Notebook containing all analysis, preprocessing, and clustering code. Commented code includes exploration and decision-making steps. |
+| `Group10_DMI_2526_report.pdf` | Structured report summarizing analytical processes, results, and practical recommendations (max 15 pages). |
 
 ---
 
@@ -112,3 +106,7 @@ This project aims to analyze employee absenteeism, identify meaningful worker se
 1. Clone this repository:  
    ```bash
    git clone <repository-url>
+2. Open the notebook:
+    ```bash
+    jupyter notebook Group10_DMI_2526.ipynb
+3. Follow the notebook cells sequentially to reproduce the analysis and visualizations.
