@@ -1,0 +1,70 @@
+# ---- Jupyter Notebook ----
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+*.checkpoint.ipynb
+
+# ---- Python Bytecode ----
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ---- Virtual Environments ----
+venv/
+env/
+.venv/
+.env/
+
+# ---- Python Packaging ----
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ---- Logs and Outputs ----
+*.log
+*.out
+*.tmp
+*.bak
+*.swp
+
+# ---- VS Code ----
+.vscode/
+.history/
+*.code-workspace
+
+# ---- OS Files ----
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# ---- Jupyter Runtime and Config ----
+.jupyter/
+jupyter_notebook_config.py
+jupyter_notebook_config.json
+.jupyter_cache/
+.jupyter/lab/workspaces/
+
+# ---- Temporary Notebooks ----
+Untitled.ipynb
+Untitled*.ipynb
+
+# ---- Environment / Dependency Files ----
+pip-log.txt
+pip-delete-this-directory.txt
+Pipfile.lock
+poetry.lock
+
+# ---- Testing ----
+.pytest_cache/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+htmlcov/
+
+# ---- Temporary Backups ----
+*~
+*.bak
+*.orig
