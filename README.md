@@ -2,6 +2,7 @@
 
 # Employee Absenteeism Analysis and Clustering  
 **Group 10 - DMI 2526**
+
 **Members:** Tyler Johnston, Fariha Khan, Zara Nayami Lelis de Carvalho, and Victory Amakekemi
 
 ---
@@ -87,17 +88,6 @@ This project aims to analyze employee absenteeism, identify meaningful worker se
 |------|-------------|
 | `Group10_DMI_2526.ipynb` | Jupyter Notebook containing all analysis, preprocessing, and clustering code. Commented code includes exploration and decision-making steps. |
 | `Group10_DMI_2526_report.pdf` | Structured report summarizing analytical processes, results, and practical recommendations (max 15 pages). |
-
----
-
-## Evaluation Criteria Addressed
-
-- **Notebook Clarity:** Clear goals, comments, and insights linked to next steps  
-- **Data Exploration:** Relevant visualizations, distributions, and correlations  
-- **Data Preprocessing:** Complete handling of missing data, outliers, encoding, and scaling  
-- **Clustering:** Well-justified feature selection, modeling, evaluation, and interpretation  
-- **Knowledge in Action:** Creative, actionable, and well-explained solutions for HR  
-- **Report Quality:** Coherent storytelling linking methodology to results and conclusions
 
 ---
 
