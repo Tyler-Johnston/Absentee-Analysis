@@ -68,3 +68,5 @@ htmlcov/
 *~
 *.bak
 *.orig
+
+*.png
