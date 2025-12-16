@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "framework": "flask",
   "builds": [
     {
       "src": "app.py",
@@ -11,5 +11,20 @@
       "src": "/(.*)",
       "dest": "app.py"
     }
-  ]
+  ],
+  "functions": {
+    "app.py": {
+      "maxDuration": 30,
+      "memory": 1024,
+      "include": [
+        "model_data/*.pkl"
+      ],
+      "exclude": [
+        "**.pyc",
+        "__pycache__",
+        "*.log",
+        "node_modules"
+      ]
+    }
+  }
 }
