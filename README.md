@@ -1,102 +1,52 @@
-
-
-# Employee Absenteeism Analysis and Clustering  
-**Group 10 - DMI 2526**
-
-**Members:** Tyler Johnston, Fariha Khan, Zara Nayami Lelis de Carvalho, and Victory Amakekemi
-
----
+# Absenteeism Analysis Dashboard
 
 ## Project Overview
 
-This project aims to analyze employee absenteeism, identify meaningful worker segments through clustering, and provide actionable insights to support Human Resources decision-making. The project consists of three main phases:  
+This project leverages data mining techniques to analyze employee absenteeism patterns in a Brazilian courier company. The goal was to segment employees into distinct risk groups using unsupervised learning, and to develop targeted HR strategies based on shared characteristics and absence patterns. The dashboard serves as an HR tool to determine the absenteeism risk level of potential new hires and provides actionable insights for HR professionals.
 
-1. **Exploratory Data Analysis (EDA) & Preprocessing**  
-2. **Worker Segmentation through Clustering**  
-3. **Knowledge in Action: Translating Insights into Practical Solutions**
+## Project Steps
 
----
+### 1. Data Loading and Exploration
 
-## Dataset
+- The dataset was loaded and explored to understand each feature, detect data quality issues (missing values, skewness, outliers), and identify patterns for clustering.
+- **Exploratory Data Analysis (EDA)** was performed to visualize key statistics and distributions, gaining insights into absenteeism drivers and identifying potential features for clustering.
 
-- **Source:** The original unedited dataset is <i>absenteeism_data.csv</i>
-- **Description:** The dataset contains employee information relevant to absenteeism; such as, the reason for absense, the month of absense, their date of birth, their number of children, being a social smoker, etc.
-- **Size:** 801 rows with 22 columns 
----
+### 2. Data Pre-processing
 
-## 1. Exploratory Data Analysis (EDA) & Preprocessing
+- **Missing Value Handling**: Missing values in categorical features were handled by forward filling or filling with a constant, while temporal features were managed by dropping rows with excessive missingness.
+- **Outlier Handling**: Extreme values in features like Height and Transportation Expense were capped to preserve data integrity.
+- **Fixing Inconsistent Data**: Categorical labels were standardized, and data types were converted for consistency.
+- **Feature Engineering**: New features were created, including:
+  - **Age** from Date of Birth.
+  - **Commute Burden Index**: Combines transportation expense, distance, and commute time.
+  - **Home Responsibility Index**: Sum of number of children and pets.
+- **Data Transformation**: Features were scaled and encoded for model compatibility, ensuring that the data was suitable for clustering and classification algorithms.
 
-**Objective:** Understand the dataset, address data quality issues, and prepare features for clustering.  
+### 3. Clustering and Model Training
 
-**Steps performed:**  
-- **Data Cleaning:**  
-  - Handled missing values using [method: mean, median, interpolation, etc.]  
-  - Detected and treated outliers with [method: IQR, Z-score, etc.]  
-- **Feature Engineering:**  
-  - Created new variables to capture relevant absenteeism behaviors ([e.g., absenteeism_rate, overtime_hours_ratio])  
-- **Data Transformation:**  
-  - Encoded categorical features using [method: one-hot, label encoding]  
-  - Normalized/scaled numerical features using [method: MinMaxScaler, StandardScaler]  
-- **Insights:**  
-  - Distribution analysis of key features  
-  - Correlation between absenteeism and other features  
-  - Identification of potential patterns for clustering
+- **Unsupervised Clustering**: K-Means, Hierarchical Clustering, and Gaussian Mixture Models were compared to segment employees into clusters. The best-performing model was selected based on silhouette scores and cluster interpretability.
+- **Cluster Profiling**: Each cluster was profiled to understand the characteristics of high-risk and low-risk employees, providing actionable insights for HR.
+- **Model Training**: A Random Forest Classifier was trained to predict cluster membership for new employees based on their features, leveraging supervised learning for accurate predictions.
 
----
+### 4. Key Features
 
-## 2. Worker Segmentation
+- **Cluster Profiles**: Employees are classified into three risk groups:
+  - **Long-Distance Commuters (Low Risk)**
+  - **Experienced Urban Workers (High Risk)**
+  - **Young Family-Oriented (Moderate Risk)**
+- **HR Insights**: For each cluster, the dashboard provides tailored HR insights and guidelines to help HR teams address the unique challenges and needs of each group.
 
-**Objective:** Apply clustering techniques to segment employees into meaningful groups.  
+### 5. HR New Employee Clustering Tool
 
-**Clustering Process:**  
-- **Feature Selection:**  
-  - Included features: [list final features used]  
-  - Excluded features: [list irrelevant or redundant features]  
-- **Algorithms Explored:**  
-  - K-Means  
-  - Hierarchical Clustering  
-  - DBSCAN / Other methods considered  
-- **Model Selection:**  
-  - Evaluated clustering quality using [metrics: silhouette score, Davies-Bouldin index, etc.]  
-  - Chose final clustering model based on [criteria]  
-- **Cluster Interpretation:**  
-  - Described characteristics of each cluster  
-  - Identified differences in absenteeism patterns  
-  - Suggested potential HR strategies for each group
+- The "New Employee Clustering Tool" was developed for HR use. It is deployed at [https://absentee-analysis.vercel.app/](https://absentee-analysis.vercel.app/).
+- This enables HR teams to proactively address the unique challenges and needs of each group, supporting targeted onboarding, retention strategies, and workplace interventions.
 
----
+## Data Mining Aspects
 
-## 3. Knowledge in Action
+- **Exploratory Data Analysis (EDA)**: Comprehensive EDA was performed to understand the dataset and identify patterns for clustering.
+- **Feature Engineering**: New features were created to capture key aspects of employee absenteeism, such as the Commute Burden Index and Home Responsibility Index.
+- **Unsupervised Clustering**: Multiple clustering algorithms were compared to segment employees into distinct risk groups.
+- **Model Evaluation**: The best-performing clustering model was selected based on silhouette scores and cluster interpretability.
+- **Supervised Learning**: A Random Forest Classifier was trained to predict cluster membership for new employees, leveraging supervised learning for accurate predictions.
 
-**Objective:** Translate the analysis into actionable insights for the company.  
-
-**Implemented Solutions:**  
-- **Visual Dashboard:**  
-  - TODO
-- **Predictive Assignment:**  
-  - TODO
-- **Feature Importance Analysis:**  
-  - TODO 
-- **Recommendations:**  
-  - TODO
-
----
-
-## Project Files
-
-| File | Description |
-|------|-------------|
-| `Group10_DMI_2526.ipynb` | Jupyter Notebook containing all analysis, preprocessing, and clustering code. Commented code includes exploration and decision-making steps. |
-| `Group10_DMI_2526_report.pdf` | Structured report summarizing analytical processes, results, and practical recommendations (max 15 pages). |
-
----
-
-## How to Run
-
-1. Clone this repository:  
-   ```bash
-   git clone <repository-url>
-2. Open the notebook:
-    ```bash
-    jupyter notebook Group10_DMI_2526.ipynb
-3. Follow the notebook cells sequentially to reproduce the analysis and visualizations.
+This project showcases the ability to build and deploy a practical, data-driven solution for business intelligence and HR applications, highlighting the use of advanced data mining techniques throughout the process.

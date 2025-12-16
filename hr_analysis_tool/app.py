@@ -63,7 +63,7 @@ def predict_cluster(features):
     # Safety check: make sure all clustering columns are present
     missing_cols = [col for col in clustering_columns if col not in features]
     if missing_cols:
-        print(f"❌ Missing columns in features: {missing_cols}")
+        print(f"Missing columns in features: {missing_cols}")
         raise ValueError(f"Missing columns: {missing_cols}")
 
     # Convert to ordered list (same order as clustering_columns)
