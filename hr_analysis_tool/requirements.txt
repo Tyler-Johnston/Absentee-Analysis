@@ -1,4 +1,4 @@
 flask
 pandas
 joblib
-scikit-learn
+sklearn.ensemble
