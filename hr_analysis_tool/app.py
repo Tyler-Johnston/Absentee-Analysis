@@ -60,15 +60,25 @@ def predict_cluster(features):
         features['Number of children'] + features['Number of pets']
     )
 
+    # Safety check: make sure all clustering columns are present
+    missing_cols = [col for col in clustering_columns if col not in features]
+    if missing_cols:
+        print(f"❌ Missing columns in features: {missing_cols}")
+        raise ValueError(f"Missing columns: {missing_cols}")
+
     # Convert to ordered list (same order as clustering_columns)
-    row = [features[col] for col in clustering_columns]
-    X = [row]
+    try:
+        row = [features[col] for col in clustering_columns]
+        X = [row]  # List of one row
 
-    # Predict cluster
-    cluster_id = rf_classifier.predict(X)[0]
-    return cluster_id
+        cluster_id = rf_classifier.predict(X)[0]
+        return cluster_id
 
-# --- Flask route ---
+    except Exception as e:
+        print(f"Error in predict_cluster: {e}")
+        raise
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -77,17 +87,9 @@ def index():
             employee_features = {
                 key: float(request.form[key])
                 for key in request.form
-                if key in [
-                    'Transportation expense',
-                    'Distance from Residence to Work',
-                    'Estimated commute time',
-                    'Age', 'Years until retirement', 'Service time',
-                    'Disciplinary failure', 'Education',
-                    'Number of children', 'Social drinker', 'Social smoker',
-                    'Number of pets'
-                ]
             }
 
+            # Predict cluster
             cluster_id = predict_cluster(employee_features)
             profile = cluster_profiles[cluster_id]
             return render_template('result.html', cluster=cluster_id, profile=profile)
@@ -97,6 +99,7 @@ def index():
             return render_template('form.html', error=str(e)), 500
 
     return render_template('form.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
