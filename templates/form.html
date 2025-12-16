@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Cluster Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>New Employee Clustering Tool</h1>
+        <form method="POST">
+            <label>
+                Transportation expense: 
+                <input 
+                    placeholder="BRL" 
+                    type="number" 
+                    name="Transportation expense" 
+                    required
+                    min="0"
+                    step="any"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '');"
+                >
+            </label>
+
+            <label>
+                Distance from Residence to Work: 
+                <input 
+                    placeholder="Km" 
+                    type="number" 
+                    name="Distance from Residence to Work" 
+                    required
+                    min="0"
+                    step="any"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '');"
+                >
+            </label>
+
+            <label>
+                Estimated commute time: 
+                <input 
+                    placeholder="Minutes" 
+                    type="number" 
+                    name="Estimated commute time" 
+                    required
+                    min="0"
+                    step="any"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '');"
+                >
+            </label>
+
+            <label>
+                Service time: 
+                <input 
+                    type="number" 
+                    name="Service time" 
+                    required
+                    min="0"
+                    step="1"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                >
+            </label>
+
+            <label>
+                Years until retirement: 
+                <input 
+                    type="number" 
+                    name="Years until retirement" 
+                    required
+                    min="0"
+                    max="100"
+                    step="1"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                >
+            </label>
+
+            <label>
+                Disciplinary failure: 
+                <input 
+                    type="number" 
+                    name="Disciplinary failure" 
+                    required
+                    min="0"
+                    max="1"
+                    step="1"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                >
+            </label>
+
+            <label>
+                Education:
+                <select name="Education" required>
+                    <option value="1">1 - High School</option>
+                    <option value="2">2 - Graduate</option>
+                    <option value="3">3 - Postgraduate</option>
+                    <option value="4">4 - Master's or PHD</option>
+                </select>
+            </label>
+
+            <label>
+                Number of children: 
+                <input 
+                    type="number" 
+                    name="Number of children" 
+                    required
+                    min="0"
+                    step="1"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                >
+            </label>
+
+            <label>Social drinker</label>
+            <div class="radio-group">
+                <label><input type="radio" name="Social drinker" value="1" required> Yes</label>
+                <label><input type="radio" name="Social drinker" value="0" required> No</label>
+            </div>
+
+            <label>Social smoker</label>
+            <div class="radio-group">
+                <label><input type="radio" name="Social smoker" value="1" required> Yes</label>
+                <label><input type="radio" name="Social smoker" value="0" required> No</label>
+            </div>
+
+            <label>
+                Number of pets: 
+                <input 
+                    type="number" 
+                    name="Number of pets" 
+                    required
+                    min="0"
+                    step="1"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                >
+            </label>
+
+            <label>
+                Body mass index: 
+                <input 
+                    type="number" 
+                    name="Body mass index" 
+                    required
+                    min="10"
+                    max="60"
+                    step="any"
+                    oninput="this.value = this.value.replace(/[^0-9.]/g, '');"
+                >
+            </label>
+
+            <label>
+                Age: 
+                <input 
+                    type="number" 
+                    name="Age" 
+                    required
+                    min="18"
+                    max="80"
+                    step="1"
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                >
+            </label>
+
+            <button type="submit">Predict Cluster</button>
+        </form>
+    </div>
+</body>
+</html>

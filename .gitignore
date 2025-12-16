@@ -70,3 +70,6 @@ htmlcov/
 *.orig
 
 *.png
+
+# ---- Models -----
+*.pkl
