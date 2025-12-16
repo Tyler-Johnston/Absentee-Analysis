@@ -5,9 +5,9 @@ import joblib
 app = Flask(__name__)
 
 try:
-    rf_classifier = joblib.load('rf_classifier.pkl')
-    clustering_columns = joblib.load('clustering_columns.pkl')
-    normalization_params = joblib.load('normalization_params.pkl')
+    rf_classifier = joblib.load('model_data/rf_classifier.pkl')
+    clustering_columns = joblib.load('model_data/clustering_columns.pkl')
+    normalization_params = joblib.load('model_data/normalization_params.pkl')
     print("Model, columns, and normalization parameters loaded successfully.")
 except Exception as e:
     print(f"Error loading model, columns, or normalization parameters: {e}")
