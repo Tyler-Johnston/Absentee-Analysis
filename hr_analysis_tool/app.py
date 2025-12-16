@@ -1,15 +1,8 @@
 from flask import Flask, render_template, request
 import pandas as pd
 import joblib
-import os
 
 app = Flask(__name__)
-
-# --- Absolute path helper: files relative to app.py ---
-HERE = os.path.dirname(os.path.abspath(__file__))
-
-def here(path):
-    return os.path.join(HERE, path)
 
 # define variables
 MAX_EXPENSE = 1.0
@@ -23,9 +16,9 @@ normalization_params = None
 
 # update the variables based on models
 try:
-    rf_classifier = joblib.load(here('rf_classifier.pkl'))
-    clustering_columns = joblib.load(here('clustering_columns.pkl'))
-    normalization_params = joblib.load(here('normalization_params.pkl'))
+    rf_classifier = joblib.load('rf_classifier.pkl')
+    clustering_columns = joblib.load('clustering_columns.pkl')
+    normalization_params = joblib.load('normalization_params.pkl')
 
     MAX_EXPENSE = normalization_params['max_expense']
     MAX_DISTANCE = normalization_params['max_distance']
