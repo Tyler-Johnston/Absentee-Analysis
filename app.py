@@ -33,10 +33,12 @@ cluster_profiles = {
 
 
 def predict_cluster(features):
-    # Calculate Commute_Burden_Index using loaded normalization params
+
     max_expense = normalization_params['max_expense']
     max_distance = normalization_params['max_distance']
     max_time = normalization_params['max_time']
+
+    # Calculate Commute_Burden_Index
     features['Commute_Burden_Index'] = (
         features['Transportation expense'] / max_expense * 0.3 +
         features['Distance from Residence to Work'] / max_distance * 0.35 +
