@@ -1,13 +1,9 @@
 {
-  "framework": "flask",
+  "version": 2,
   "builds": [
     {
       "src": "app.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxDuration": 30,
-        "memory": 1024
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
@@ -15,10 +11,5 @@
       "src": "/(.*)",
       "dest": "app.py"
     }
-  ],
-  "regions": ["sfo1"],
-  "build": {
-    "includeFiles": ["model_data/**"],
-    "excludeFiles": ["**/*.pyc", "__pycache__/**", "*.log", "node_modules/**"]
-  }
+  ]
 }

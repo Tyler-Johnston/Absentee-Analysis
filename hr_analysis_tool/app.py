@@ -15,9 +15,9 @@ normalization_params = None
 
 # update the variables based on models
 try:
-    rf_classifier = joblib.load('model_data/rf_classifier.pkl')
-    clustering_columns = joblib.load('model_data/clustering_columns.pkl')
-    normalization_params = joblib.load('model_data/normalization_params.pkl')
+    rf_classifier = joblib.load('rf_classifier.pkl')
+    clustering_columns = joblib.load('clustering_columns.pkl')
+    normalization_params = joblib.load('normalization_params.pkl')
 
     MAX_EXPENSE = normalization_params['max_expense']
     MAX_DISTANCE = normalization_params['max_distance']
