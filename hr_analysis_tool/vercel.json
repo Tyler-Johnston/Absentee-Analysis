@@ -16,8 +16,5 @@
       "src": "/(.*)",
       "dest": "app.py"
     }
-  ],
-  "build": {
-    "includeFiles": ["*.pkl"]
-  }
+  ]
 }
