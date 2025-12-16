@@ -4,6 +4,16 @@ import joblib
 
 app = Flask(__name__)
 
+# define variables
+MAX_EXPENSE = 1.0
+MAX_DISTANCE = 1.0
+MAX_TIME = 1.0
+
+rf_classifier = None
+clustering_columns = []
+normalization_params = None
+
+# update the variables based on models
 try:
     rf_classifier = joblib.load('model_data/rf_classifier.pkl')
     clustering_columns = joblib.load('model_data/clustering_columns.pkl')
