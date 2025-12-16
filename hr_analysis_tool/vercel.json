@@ -3,7 +3,11 @@
   "builds": [
     {
       "src": "app.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "maxDuration": 30,
+        "memory": 1024
+      }
     }
   ],
   "routes": [
@@ -12,19 +16,9 @@
       "dest": "app.py"
     }
   ],
-  "functions": {
-    "app.py": {
-      "maxDuration": 30,
-      "memory": 1024,
-      "include": [
-        "model_data/*.pkl"
-      ],
-      "exclude": [
-        "**.pyc",
-        "__pycache__",
-        "*.log",
-        "node_modules"
-      ]
-    }
+  "regions": ["sfo1"],
+  "build": {
+    "includeFiles": ["model_data/**"],
+    "excludeFiles": ["**/*.pyc", "__pycache__/**", "*.log", "node_modules/**"]
   }
 }
