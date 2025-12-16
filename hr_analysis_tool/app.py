@@ -63,7 +63,7 @@ def predict_cluster(features):
     )
 
     # Convert to DataFrame and ensure correct column order
-    employee_df = pd.DataFrame([features])
+    # employee_df = pd.DataFrame([features])
     employee_df = employee_df[clustering_columns]
     cluster_id = rf_classifier.predict(employee_df)[0]
     return cluster_id
