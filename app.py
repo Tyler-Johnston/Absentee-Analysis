@@ -7,9 +7,10 @@ app = Flask(__name__)
 try:
     rf_classifier = joblib.load('rf_classifier.pkl')
     clustering_columns = joblib.load('clustering_columns.pkl')
-    print("Model and columns loaded successfully.")
+    normalization_params = joblib.load('normalization_params.pkl')
+    print("Model, columns, and normalization parameters loaded successfully.")
 except Exception as e:
-    print(f"Error loading model or columns: {e}")
+    print(f"Error loading model, columns, or normalization parameters: {e}")
 
 # Cluster profiles
 cluster_profiles = {
@@ -30,24 +31,40 @@ cluster_profiles = {
     }
 }
 
-def predict_cluster(features):
-    # Convert to DataFrame and ensure correct column order
 
-    #TODO: do the math for the commute burden and home responsibility index.
-    
+def predict_cluster(features):
+    # Calculate Commute_Burden_Index using loaded normalization params
+    max_expense = normalization_params['max_expense']
+    max_distance = normalization_params['max_distance']
+    max_time = normalization_params['max_time']
+    features['Commute_Burden_Index'] = (
+        features['Transportation expense'] / max_expense * 0.3 +
+        features['Distance from Residence to Work'] / max_distance * 0.35 +
+        features['Estimated commute time'] / max_time * 0.35
+    )
+
+    # Calculate Home_Responsibility_Index
+    features['Home_Responsibility_Index'] = (
+        features['Number of children'] + features['Number of pets']
+    )
+
+    # Convert to DataFrame and ensure correct column order
     employee_df = pd.DataFrame([features])
     employee_df = employee_df[clustering_columns]
     cluster_id = rf_classifier.predict(employee_df)[0]
     return cluster_id
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
+        # Convert form inputs to float and store in a dictionary
         employee_features = {key: float(request.form[key]) for key in request.form}
         cluster_id = predict_cluster(employee_features)
         profile = cluster_profiles[cluster_id]
         return render_template('result.html', cluster=cluster_id, profile=profile)
     return render_template('form.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

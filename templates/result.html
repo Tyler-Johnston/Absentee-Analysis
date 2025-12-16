@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Cluster Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <div class="result-card">
+            <h2>Cluster: {{ cluster }} ({{ profile.name }})</h2>
+            <p><strong>Risk:</strong> {{ profile.risk }}</p>
+            <p><strong>Expected absence:</strong> {{ profile.avg_absence }} hours</p>
+        </div>
+
+        <div class="insights">
+            <h2>Key Insights for HR</h2>
+
+            {% if cluster == 0 %}
+            <p><strong>Insight:</strong> This group has the lowest absenteeism despite the highest commute burden, showing strong resilience.</p>
+            <p><strong>HR Recommendations:</strong></p>
+            <ul>
+                <li>Maintain current attendance with flexible arrangements (e.g., occasional remote work, adjusted schedules).</li>
+                <li>Recognize and reward regular attendance (e.g., preferred vacation slots, public recognition).</li>
+                <li>Monitor for burnout and offer support programs if needed.</li>
+            </ul>
+            {% elif cluster == 1 %}
+            <p><strong>Insight:</strong> This group has the highest absenteeism, likely due to non-commute factors (health, engagement).</p>
+            <p><strong>HR Recommendations:</strong></p>
+            <ul>
+                <li>Implement targeted wellness programs (health screenings, stress management).</li>
+                <li>Review workload, job roles, and shift patterns to reduce disengagement.</li>
+                <li>Introduce regular check-ins and feedback mechanisms.</li>
+                <li>Offer priority access to vacation, flexible schedules, or remote work to boost morale.</li>
+            </ul>
+            {% elif cluster == 2 %}
+            <p><strong>Insight:</strong> This group has stable attendance despite high home responsibilities.</p>
+            <p><strong>HR Recommendations:</strong></p>
+            <ul>
+                <li>Promote work–life balance initiatives (flexible hours, adjusted shifts, remote work).</li>
+                <li>Provide access to family-friendly policies and support programs.</li>
+                <li>Encourage open communication and offer flexibility when needed.</li>
+                <li>Recognize and reward employees who maintain attendance despite home commitments.</li>
+            </ul>
+            {% endif %}
+
+            <h3>Non-Monetary Incentives</h3>
+            <ul>
+                <li><strong>Remote work</strong>: Allow telework days for high performers.</li>
+                <li><strong>Flexible schedules</strong>: Let employees choose preferred start/end times.</li>
+                <li><strong>Priority in vacation</strong>: Offer early selection for preferred vacation periods.</li>
+                <li><strong>Recognition programs</strong>: Highlight top attendance with awards or shout-outs.</li>
+            </ul>
+        </div>
+
+        <a href="/">← Back to Form</a>
+    </div>
+</body>
+</html>
