@@ -8,6 +8,11 @@ try:
     rf_classifier = joblib.load('model_data/rf_classifier.pkl')
     clustering_columns = joblib.load('model_data/clustering_columns.pkl')
     normalization_params = joblib.load('model_data/normalization_params.pkl')
+
+    MAX_EXPENSE = normalization_params['max_expense']
+    MAX_DISTANCE = normalization_params['max_distance']
+    MAX_TIME = normalization_params['max_time']
+
     print("Model, columns, and normalization parameters loaded successfully.")
 except Exception as e:
     print(f"Error loading model, columns, or normalization parameters: {e}")
@@ -34,15 +39,11 @@ cluster_profiles = {
 
 def predict_cluster(features):
 
-    max_expense = normalization_params['max_expense']
-    max_distance = normalization_params['max_distance']
-    max_time = normalization_params['max_time']
-
     # Calculate Commute_Burden_Index
     features['Commute_Burden_Index'] = (
-        features['Transportation expense'] / max_expense * 0.3 +
-        features['Distance from Residence to Work'] / max_distance * 0.35 +
-        features['Estimated commute time'] / max_time * 0.35
+        features['Transportation expense'] / MAX_EXPENSE * 0.3 +
+        features['Distance from Residence to Work'] / MAX_DISTANCE * 0.35 +
+        features['Estimated commute time'] / MAX_TIME * 0.35
     )
 
     # Calculate Home_Responsibility_Index
