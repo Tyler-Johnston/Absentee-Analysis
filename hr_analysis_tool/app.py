@@ -4,9 +4,9 @@ import joblib
 app = Flask(__name__)
 HERE = app.root_path
 
-MAX_EXPENSE = 1.0
-MAX_DISTANCE = 1.0
-MAX_TIME = 1.0
+max_expense = 1.0
+max_distance = 1.0
+max_time = 1.0
 
 rf_classifier = None
 clustering_columns = []
@@ -20,15 +20,14 @@ try:
     clustering_columns = joblib.load(here('clustering_columns.pkl'))
     normalization_params = joblib.load(here('normalization_params.pkl'))
 
-    MAX_EXPENSE = normalization_params['max_expense']
-    MAX_DISTANCE = normalization_params['max_distance']
-    MAX_TIME = normalization_params['max_time']
+    max_expense = normalization_params['max_expense']
+    max_distance = normalization_params['max_distance']
+    max_time = normalization_params['max_time']
 
     print("Model, columns, and normalization parameters loaded successfully.")
 except Exception as e:
     print(f"Error loading model, columns, or normalization parameters: {e}")
 
-# --- Cluster profiles ---
 cluster_profiles = {
     0: {
         'name': 'Long-Distance Commuters',
@@ -48,28 +47,28 @@ cluster_profiles = {
 }
 
 def predict_cluster(features):
-    # Calculate Commute_Burden_Index
+    # calculate Commute_Burden_Index
     features['Commute_Burden_Index'] = (
-        features['Transportation expense'] / MAX_EXPENSE * 0.3 +
-        features['Distance from Residence to Work'] / MAX_DISTANCE * 0.35 +
-        features['Estimated commute time'] / MAX_TIME * 0.35
+        features['Transportation expense'] / max_expense * 0.3 +
+        features['Distance from Residence to Work'] / max_distance * 0.35 +
+        features['Estimated commute time'] / max_time * 0.35
     )
 
-    # Calculate Home_Responsibility_Index
+    # calculate Home_Responsibility_Index
     features['Home_Responsibility_Index'] = (
         features['Number of children'] + features['Number of pets']
     )
 
-    # Safety check: make sure all clustering columns are present
+    # make sure all clustering columns are present
     missing_cols = [col for col in clustering_columns if col not in features]
     if missing_cols:
         print(f"Missing columns in features: {missing_cols}")
         raise ValueError(f"Missing columns: {missing_cols}")
 
-    # Convert to ordered list (same order as clustering_columns)
+    # convert to ordered list (same order as clustering_columns)
     try:
         row = [features[col] for col in clustering_columns]
-        X = [row]  # List of one row
+        X = [row] # (a list of one row)
 
         cluster_id = rf_classifier.predict(X)[0]
         return cluster_id
@@ -83,13 +82,13 @@ def predict_cluster(features):
 def index():
     if request.method == 'POST':
         try:
-            # Convert form inputs to float
+            # convert form inputs to float
             employee_features = {
                 key: float(request.form[key])
                 for key in request.form
             }
 
-            # Predict cluster
+            # predict cluster
             cluster_id = predict_cluster(employee_features)
             profile = cluster_profiles[cluster_id]
             return render_template('result.html', cluster=cluster_id, profile=profile)
