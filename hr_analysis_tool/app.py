@@ -29,21 +29,9 @@ except Exception as e:
     print(f"Error loading model, columns, or normalization parameters: {e}")
 
 cluster_profiles = {
-    0: {
-        'name': 'Long-Distance Commuters',
-        'risk': 'Low Risk',
-        'avg_absence': 5.25
-    },
-    1: {
-        'name': 'Experienced Urban Workers', 
-        'risk': 'High Risk',
-        'avg_absence': 8.36
-    },
-    2: {
-        'name': 'Young Family-Oriented',
-        'risk': 'Moderate Risk',
-        'avg_absence': 6.88
-    }
+    0: {'name': 'Young Family-Oriented', 'risk': 'Moderate Risk', 'avg_absence': 6.88},
+    1: {'name': 'Long-Distance Commuters', 'risk': 'Low Risk', 'avg_absence': 5.25},
+    2: {'name': 'Experienced Urban Workers', 'risk': 'High Risk', 'avg_absence': 8.36},
 }
 
 def predict_cluster(features):
