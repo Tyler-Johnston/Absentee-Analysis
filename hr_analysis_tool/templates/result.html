@@ -17,40 +17,44 @@
         <div class="insights">
             <h2>Key Insights for HR</h2>
 
+            {# Cluster 0: Young Family-Oriented (257 employees, ~6.88h, medium risk) [file:15] #}
             {% if cluster == 0 %}
-            <p><strong>Insight:</strong> This group has the lowest absenteeism despite the highest commute burden, showing strong resilience.</p>
+            <p><strong>Insight:</strong> This group has medium absenteeism with the highest home responsibilities and a moderate commute burden, indicating pressure from family commitments more than logistics.[file:15]</p>
             <p><strong>HR Recommendations:</strong></p>
             <ul>
-                <li>Maintain current attendance with flexible arrangements (e.g., occasional remote work, adjusted schedules).</li>
-                <li>Recognize and reward regular attendance (e.g., preferred vacation slots, public recognition).</li>
-                <li>Monitor for burnout and offer support programs if needed.</li>
+                <li>Expand work–life balance options (flexible hours, occasional remote work, shift swaps for family needs).[file:15]</li>
+                <li>Communicate clearly about family-friendly policies and make access easy and stigma-free.[file:15]</li>
+                <li>Offer targeted support such as childcare assistance partnerships or family days to strengthen engagement.[file:15]</li>
             </ul>
+
+            {# Cluster 1: Long-Distance Commuters (207 employees, ~5.25h, lowest risk) [file:15] #}
             {% elif cluster == 1 %}
-            <p><strong>Insight:</strong> This group has the highest absenteeism, likely due to non-commute factors (health, engagement).</p>
+            <p><strong>Insight:</strong> This group has the lowest absenteeism despite the highest commute burden, suggesting strong resilience and commitment.[file:15]</p>
             <p><strong>HR Recommendations:</strong></p>
             <ul>
-                <li>Implement targeted wellness programs (health screenings, stress management).</li>
-                <li>Review workload, job roles, and shift patterns to reduce disengagement.</li>
-                <li>Introduce regular check-ins and feedback mechanisms.</li>
-                <li>Offer priority access to vacation, flexible schedules, or remote work to boost morale.</li>
+                <li>Preserve and enhance flexible arrangements (occasional remote work, adjusted start/end times on heavy-traffic days).[file:15]</li>
+                <li>Recognize consistent attendance through non-monetary rewards and public appreciation.[file:15]</li>
+                <li>Monitor for fatigue or burnout and offer ergonomic, wellness, or transport-related support.[file:15]</li>
             </ul>
+
+            {# Cluster 2: Experienced Urban Workers (267 employees, ~8.36h, highest risk) [file:15] #}
             {% elif cluster == 2 %}
-            <p><strong>Insight:</strong> This group has stable attendance despite high home responsibilities.</p>
+            <p><strong>Insight:</strong> This group has the highest absenteeism despite the shortest commute, pointing to health, engagement, or job-content factors rather than logistics.[file:15]</p>
             <p><strong>HR Recommendations:</strong></p>
             <ul>
-                <li>Promote work–life balance initiatives (flexible hours, adjusted shifts, remote work).</li>
-                <li>Provide access to family-friendly policies and support programs.</li>
-                <li>Encourage open communication and offer flexibility when needed.</li>
-                <li>Recognize and reward employees who maintain attendance despite home commitments.</li>
+                <li>Implement wellness and mental-health initiatives (screenings, stress programs, counseling).[file:15]</li>
+                <li>Review workload, role clarity, and management practices to address disengagement or frustration.[file:15]</li>
+                <li>Increase 1:1 check-ins, feedback loops, and development opportunities to strengthen connection.[file:15]</li>
+                <li>Use flexible schedules or preferred time-off as levers to improve motivation and attendance.[file:15]</li>
             </ul>
             {% endif %}
 
             <h3>Non-Monetary Incentives</h3>
             <ul>
-                <li><strong>Remote work</strong>: Allow telework days for high performers.</li>
-                <li><strong>Flexible schedules</strong>: Let employees choose preferred start/end times.</li>
-                <li><strong>Priority in vacation</strong>: Offer early selection for preferred vacation periods.</li>
-                <li><strong>Recognition programs</strong>: Highlight top attendance with awards or shout-outs.</li>
+                <li><strong>Remote work</strong>: Allow telework days for suitable roles and high performers.[file:15]</li>
+                <li><strong>Flexible schedules</strong>: Let employees choose preferred start/end times within policy limits.[file:15]</li>
+                <li><strong>Priority in vacation</strong>: Offer early selection for high-attendance employees.[file:15]</li>
+                <li><strong>Recognition programs</strong>: Highlight strong attendance and improvement with awards or shout-outs.[file:15]</li>
             </ul>
         </div>
 
