@@ -17,18 +17,8 @@
         <div class="insights">
             <h2>Key Insights for HR</h2>
 
-            {# Cluster 0: Young Family-Oriented (257 employees, ~6.88h, medium risk)  #}
+            {# Cluster 0: Long-Distance Commuters (190 employees, ~5.40h, lowest risk) #}
             {% if cluster == 0 %}
-            <p><strong>Insight:</strong> This group has medium absenteeism with the highest home responsibilities and a moderate commute burden, indicating pressure from family commitments more than logistics.</p>
-            <p><strong>HR Recommendations:</strong></p>
-            <ul>
-                <li>Expand work–life balance options (flexible hours, occasional remote work, shift swaps for family needs).</li>
-                <li>Communicate clearly about family-friendly policies and make access easy and stigma-free.</li>
-                <li>Offer targeted support such as childcare assistance partnerships or family days to strengthen engagement.</li>
-            </ul>
-
-            {# Cluster 1: Long-Distance Commuters (207 employees, ~5.25h, lowest risk)  #}
-            {% elif cluster == 1 %}
             <p><strong>Insight:</strong> This group has the lowest absenteeism despite the highest commute burden, suggesting strong resilience and commitment.</p>
             <p><strong>HR Recommendations:</strong></p>
             <ul>
@@ -37,8 +27,8 @@
                 <li>Monitor for fatigue or burnout and offer ergonomic, wellness, or transport-related support.</li>
             </ul>
 
-            {# Cluster 2: Experienced Urban Workers (267 employees, ~8.36h, highest risk)  #}
-            {% elif cluster == 2 %}
+            {# Cluster 1: Experienced Urban Workers (262 employees, ~8.46h, highest risk) #}
+            {% elif cluster == 1 %}
             <p><strong>Insight:</strong> This group has the highest absenteeism despite the shortest commute, pointing to health, engagement, or job-content factors rather than logistics.</p>
             <p><strong>HR Recommendations:</strong></p>
             <ul>
@@ -46,6 +36,16 @@
                 <li>Review workload, role clarity, and management practices to address disengagement or frustration.</li>
                 <li>Increase 1:1 check-ins, feedback loops, and development opportunities to strengthen connection.</li>
                 <li>Use flexible schedules or preferred time-off as levers to improve motivation and attendance.</li>
+            </ul>
+
+            {# Cluster 2: Young Family-Oriented (249 employees, ~7.04h, medium risk) #}
+            {% elif cluster == 2 %}
+            <p><strong>Insight:</strong> This group has medium absenteeism with the highest home responsibilities and a moderate commute burden, indicating pressure from family commitments more than logistics.</p>
+            <p><strong>HR Recommendations:</strong></p>
+            <ul>
+                <li>Expand work–life balance options (flexible hours, occasional remote work, shift swaps for family needs).</li>
+                <li>Communicate clearly about family-friendly policies and make access easy and stigma-free.</li>
+                <li>Offer targeted support such as childcare assistance partnerships or family days to strengthen engagement.</li>
             </ul>
             {% endif %}
 
