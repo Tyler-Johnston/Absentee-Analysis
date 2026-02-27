@@ -68,3 +68,6 @@ htmlcov/
 *~
 *.bak
 *.orig
+
+*.png
+*.csv
