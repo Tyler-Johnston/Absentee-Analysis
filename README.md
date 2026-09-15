@@ -1,52 +1,133 @@
 # Absenteeism Analysis Dashboard
 
-## Project Overview
+> An end-to-end data-mining project that turns employee absenteeism data into actionable workforce profiles and an interactive decision-support prototype.
 
-This project leverages data mining techniques to analyze employee absenteeism patterns in a Brazilian courier company. The goal was to segment employees into distinct risk groups using unsupervised learning, and to develop targeted HR strategies based on shared characteristics and absence patterns. The dashboard serves as an HR tool to determine the absenteeism risk level of potential new hires and provides actionable insights for HR professionals.
+[Live demo](https://absentee-analysis.vercel.app/) · [Explore the analysis notebook](Group10_DMI_2526.ipynb)
 
-## Project Steps
+## The project
 
-### 1. Data Loading and Exploration
+A Brazilian courier company wants to better understand its employees' absenteeism patterns. Rather than treating every absence as the same problem, this project uses unsupervised learning to identify groups of employees with similar demographic, work, commute, and lifestyle characteristics.
 
-- The dataset was loaded and explored to understand each feature, detect data quality issues (missing values, skewness, outliers), and identify patterns for clustering.
-- **Exploratory Data Analysis (EDA)** was performed to visualize key statistics and distributions, gaining insights into absenteeism drivers and identifying potential features for clustering.
+The result is a three-segment employee profile framework, paired with a Flask web application that assigns a hypothetical employee profile to a segment and presents relevant workplace-support recommendations.
 
-### 2. Data Pre-processing
+## Results at a glance
 
-- **Missing Value Handling**: Missing values in categorical features were handled by forward filling or filling with a constant, while temporal features were managed by dropping rows with excessive missingness.
-- **Outlier Handling**: Extreme values in features like Height and Transportation Expense were capped to preserve data integrity.
-- **Fixing Inconsistent Data**: Categorical labels were standardized, and data types were converted for consistency.
-- **Feature Engineering**: New features were created, including:
-  - **Age** from Date of Birth.
-  - **Commute Burden Index**: Combines transportation expense, distance, and commute time.
-  - **Home Responsibility Index**: Sum of number of children and pets.
-- **Data Transformation**: Features were scaled and encoded for model compatibility, ensuring that the data was suitable for clustering and classification algorithms.
+| Employee profile | Share of dataset | Average absence | What stands out |
+| --- | ---: | ---: | --- |
+| Long-Distance Commuters | 27.1% | 5.40 hours | Lowest absenteeism despite the highest commute burden |
+| Experienced Urban Workers | 37.4% | 8.46 hours | Highest absenteeism despite the shortest commute |
+| Young Family-Oriented | 35.5% | 7.04 hours | Near-average absenteeism with the highest home responsibilities |
 
-### 3. Clustering and Model Training
+The central finding challenges a simple commute-based explanation: the group with the greatest commute burden had the lowest average absenteeism, while the short-commute group had the highest. This points to workplace, health, engagement, or other contextual factors worth investigating rather than assuming commuting is the primary driver.
 
-- **Unsupervised Clustering**: K-Means, Hierarchical Clustering, and Gaussian Mixture Models were compared to segment employees into clusters. The best-performing model was selected based on silhouette scores and cluster interpretability.
-- **Cluster Profiling**: Each cluster was profiled to understand the characteristics of high-risk and low-risk employees, providing actionable insights for HR.
-- **Model Training**: A Random Forest Classifier was trained to predict cluster membership for new employees based on their features, leveraging supervised learning for accurate predictions.
+## From data to decision support
 
-### 4. Key Features
+```text
+Raw employee data
+        ↓
+Cleaning and exploratory analysis
+        ↓
+Feature engineering and scaling
+        ↓
+Cluster evaluation and employee segmentation
+        ↓
+Random Forest profile-assignment model
+        ↓
+Flask employee-profile support tool
+```
 
-- **Cluster Profiles**: Employees are classified into three risk groups:
-  - **Long-Distance Commuters (Low Risk)**
-  - **Experienced Urban Workers (High Risk)**
-  - **Young Family-Oriented (Moderate Risk)**
-- **HR Insights**: For each cluster, the dashboard provides tailored HR insights and guidelines to help HR teams address the unique challenges and needs of each group.
+## Methodology
 
-### 5. HR New Employee Clustering Tool
+### Dataset and exploration
 
-- The "New Employee Clustering Tool" was developed for HR use. It is deployed at [https://absentee-analysis.vercel.app/](https://absentee-analysis.vercel.app/).
-- This enables HR teams to proactively address the unique challenges and needs of each group, supporting targeted onboarding, retention strategies, and workplace interventions.
+The analysis uses **800 employee records** with **22 source variables**, covering absenteeism, demographics, work conditions, commute characteristics, and lifestyle indicators. Exploratory data analysis examined distributions, missing values, outliers, inconsistent labels, and relationships between absenteeism and potential drivers.
 
-## Data Mining Aspects
+### Preparation and feature engineering
 
-- **Exploratory Data Analysis (EDA)**: Comprehensive EDA was performed to understand the dataset and identify patterns for clustering.
-- **Feature Engineering**: New features were created to capture key aspects of employee absenteeism, such as the Commute Burden Index and Home Responsibility Index.
-- **Unsupervised Clustering**: Multiple clustering algorithms were compared to segment employees into distinct risk groups.
-- **Model Evaluation**: The best-performing clustering model was selected based on silhouette scores and cluster interpretability.
-- **Supervised Learning**: A Random Forest Classifier was trained to predict cluster membership for new employees, leveraging supervised learning for accurate predictions.
+The pipeline addressed missing values, capped selected extreme values, standardized inconsistent categorical labels, and scaled continuous features before clustering.
 
-This project showcases the ability to build and deploy a practical, data-driven solution for business intelligence and HR applications, highlighting the use of advanced data mining techniques throughout the process.
+Two composite features were created to make the analysis more interpretable:
+
+- **Commute Burden Index** combines transportation expense, distance from home to work, and estimated commute time.
+- **Home Responsibility Index** combines the number of children and pets.
+
+The final segmentation used **15 features** that describe employee characteristics. Calendar variables, absence reasons, and absenteeism hours were intentionally excluded from the clustering inputs so the groups represent *who employees are*, rather than when or why an absence occurred.
+
+### Clustering and validation
+
+K-Means, Ward hierarchical clustering, average-linkage hierarchical clustering, and Gaussian mixture models were compared using three clusters. K-Means was selected because it tied for the strongest silhouette score while producing the clearest, most actionable profiles for HR.
+
+| Model | Silhouette score |
+| --- | ---: |
+| **K-Means** | **0.561** |
+| Hierarchical (Ward) | 0.557 |
+| Hierarchical (Average) | 0.518 |
+| Gaussian Mixture | 0.561 |
+
+Although two clusters achieved the highest raw silhouette score (0.668), three clusters provided a more useful balance of separation, interpretability, and distinct intervention strategies.
+
+### Deployment model
+
+After clustering, a Random Forest classifier was trained to reproduce cluster assignments for new profile scenarios. Five-fold cross-validation achieved **99.86% accuracy (±0.28%)**. This score measures how well the classifier recreates the discovered cluster labels—it is not a prediction of whether an individual employee will be absent.
+
+## Interactive prototype
+
+The Flask application packages the analysis into a simple form-based prototype. A user supplies a hypothetical employee profile; the tool then:
+
+1. Calculates the two engineered indices.
+2. Applies the same scaling used in the analysis pipeline.
+3. Assigns the profile to one of the three segments.
+4. Displays the segment's typical absenteeism level and tailored workplace-support ideas.
+
+Suggested interventions include flexible schedules, occasional remote work where suitable, wellbeing support, recognition programmes, and family-friendly policies.
+
+## Responsible use
+
+This is an academic data-mining and decision-support prototype. Its segments describe patterns in an anonymized historical dataset; they do **not** establish why a specific person is absent, predict an individual's future attendance, or determine employment eligibility.
+
+The prototype must not be used to screen candidates, make hiring decisions, or automate employment decisions. Several input attributes—such as age, body mass index, family status, and lifestyle indicators—can be sensitive or legally protected in employment contexts. Any real-world application would require legal review, fairness testing, data-governance controls, and meaningful human oversight.
+
+## Tech stack
+
+- **Analysis:** Python, pandas, NumPy, Matplotlib, Seaborn
+- **Machine learning:** scikit-learn (K-Means, hierarchical clustering, Gaussian mixture models, Random Forest)
+- **Application:** Flask, HTML, CSS
+- **Deployment:** Vercel
+
+## Repository structure
+
+```text
+.
+├── Group10_DMI_2526.ipynb       # EDA, preprocessing, clustering, and evaluation
+├── absenteeism_data.csv         # Source dataset
+├── requirements.txt             # Analysis environment dependencies
+└── hr_analysis_tool/
+    ├── app.py                   # Flask application
+    ├── templates/               # Form and result views
+    ├── static/                  # Application styling
+    ├── *.pkl                    # Saved classifier, scaler, columns, and parameters
+    └── requirements.txt         # Application dependencies
+```
+
+## Run locally
+
+### Analysis notebook
+
+```bash
+pip install -r requirements.txt
+jupyter notebook Group10_DMI_2526.ipynb
+```
+
+### Flask prototype
+
+```bash
+cd hr_analysis_tool
+pip install -r requirements.txt
+python app.py
+```
+
+Then open `http://127.0.0.1:5000` in your browser.
+
+## Team
+
+Developed for the Data Mining I course by Fariha Khan, Tyler Johnston, Zara Carvalho, and Victory Amakekemi.
